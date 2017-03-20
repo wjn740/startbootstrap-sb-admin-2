@@ -43,4 +43,3 @@ def mysqlquery(query):
 
 print("Content-type: text/plain\n")
 mysqlquery('select distinct `host`,`testsuite`,`testcase`,`product`,avg(`test_time`)  from performance_view where `host` = \'apac2-ph022.bej.suse.com\' or `host` = \'apac2-ph027.bej.suse.com\' or `host` = \'apac2-ph023.bej.suse.com\' or `host` = \'apac2-ph026.bej.suse.com\' group by `testsuite`,`testcase`,`host` order by `host`,`product`;')
-

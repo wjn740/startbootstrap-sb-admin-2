@@ -762,7 +762,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="list-group">
+                            <div class="list-group" id="events_notify">
                                 <a href="#" class="list-group-item">
                                     <i class="fa fa-comment fa-fw"></i> New Comment
                                     <span class="pull-right text-muted small"><em>4 minutes ago</em>
@@ -983,6 +983,31 @@
                 t = t + "</ul>";//end third level
                 t = t + d;
                 $("#projects_list").append(t);
+            });
+        },
+        async: false
+    });
+    $.ajax({
+        url: '../services/readsyslogfile.py',
+        dataType: 'json',
+        success: function(data) {
+            var a;
+            var a0;
+            var b;
+            var b0;
+            var c;
+            var c0;
+            a = "<a href=\"#\" class=\"list-group-item\">"
+            b = "<i class=\"fa fa-comment fa-fw\">"
+            b0= "</i>"
+            c = "<span class=\"pull-right text-muted small\"><em>"
+            c0 = "</em></span>"
+            a0 = "</a>"
+        
+            $("#events_notify").html("");
+            $.each(data, function(i, e){
+                t = a + b + b0 + e.msg + c + e.time + c0 + a0
+                $("#events_notify").prepend(t);
             });
         },
         async: false

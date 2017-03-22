@@ -1004,6 +1004,9 @@
             c0 = "</em></span>"
             a0 = "</a>"
         
+            if (data[0] == null) {
+                return false;
+            }
             $("#events_notify").html("");
             $.each(data, function(i, e){
                 t = a + b + b0 + e.msg + c + e.time + c0 + a0

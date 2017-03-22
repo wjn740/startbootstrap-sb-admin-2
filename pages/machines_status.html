@@ -425,7 +425,17 @@
     <!-- jQuery -->
     <script src="../vendor/jquery/jquery.min.js"></script>
 
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
     <script>
+    $("#page-wrapper").hide();
     $.ajax({
         url: '../services/machines_status.py',
         dataType: 'json',
@@ -443,7 +453,6 @@
             var panel_head_end=row_end;
             var panel_body_end=row_end;
             var panel_footer_end=row_end;
-
             $.each(data, function(i, e){
                 var hostname;
                 var msg;
@@ -470,20 +479,13 @@
                     buffer=buffer.concat(row_end);
                 }
             });
-            $("#page-wrapper").append(buffer)
+            $("#page-wrapper").append(buffer);
+            $("#page-wrapper").show();
         },
         async: false
     });
+    $(".row").each(function(i){$(this).slideUp(100).delay(i*100).fadeIn("slow");});
     </script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
-
 </body>
 
 </html>

@@ -17,8 +17,8 @@ objects_list = []
 for host in hosts:
     hostname="".join(['147.2.207.',host])
     try:
-        ssh.connect(hostname, username='root', password='susetesting')
-    except TimeoutError:
+        ssh.connect(hostname, username='root', password='susetesting', timeout=5, banner_timeout=10)
+    except socket.error:
         continue;
 
     try:

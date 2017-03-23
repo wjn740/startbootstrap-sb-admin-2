@@ -448,6 +448,11 @@
             var panel_body="<div class=\"panel-body\">";
             var panel_footer="<div class=\"panel-footer\">";
             var row_end="</div>";
+            var progress_slot="<div class=\"progress progress-striped active\">";
+            var progress_bar="<div class=\"progress-bar progress-bar-success\" role=\"progressbar\" aria-valuenow=\"40\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 40%\">";
+            var progress_span="<span class=\"sr-only\">40% Complete (success)</span>";
+            var progress_bar_end="</div>";
+            var progress_slot_end="</div>";
             var col_end=row_end;
             var panel_end=row_end;
             var panel_head_end=row_end;
@@ -456,8 +461,10 @@
             $.each(data, function(i, e){
                 var hostname;
                 var msg;
+                var progress;
                 hostname = e.hostname;
                 msg = e.msg;
+                progress = e.progress;
                 if (i % 3 == 0) {
                     buffer=buffer.concat(row);
                 } 
@@ -472,6 +479,12 @@
                 buffer=buffer.concat("</pre>");
                 buffer=buffer.concat(panel_body_end);
                 buffer=buffer.concat(panel_footer);
+                <!-- Setup progress bar -->
+                buffer=buffer.concat(progress_slot);
+                buffer=buffer.concat("<div class=\"progress-bar progress-bar-success\" role=\"progressbar\" aria-valuenow=\""+ e.progress +"\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: " + e.progress + "%\">");
+                buffer=buffer.concat("<span class=\"sr-only\">"+e.progress+"% Complete (success)</span>");
+                buffer=buffer.concat(progress_bar_end);
+                buffer=buffer.concat(progress_slot_end);
                 buffer=buffer.concat(panel_footer_end);
                 buffer=buffer.concat(panel_end);
                 buffer=buffer.concat(col_end);

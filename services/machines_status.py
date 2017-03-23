@@ -6,6 +6,7 @@ import sys
 import socket
 import collections
 import json
+import re
 
 hosts = ['209', '210', '226', '227']
 
@@ -28,10 +29,18 @@ for host in hosts:
 
 
     msg = "".join(stdout.readlines())
-
+    s="The current ration is (\d+)\.?(\d+)?" 
+    for l in msg.splitlines():
+        m=re.search(s,l)
+        if m:
+            progress=(m.group(1)+"."+m.group(2))
+        
+        
+         
     d = collections.OrderedDict()
     d['hostname'] = hostname
     d['msg'] = msg
+    d['progress'] = progress
     objects_list.append(d)
 
 

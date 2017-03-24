@@ -887,38 +887,8 @@
 
     <!-- jQuery -->
     <script src="../vendor/jquery/jquery.min.js"></script>
-
+    <script src="../js/projects.js"></script>
     <script>
-    //$(document).ready( function() {
-    $.ajax({
-        url: '../data/projects.py',
-        dataType: 'json',
-        success: function(data) {
-        var a;
-        var b;
-        var c;
-        var d;
-        var third_level;
-        var t;
-        a="<li>";
-        b="<a href=\"#\">";
-        c="<span class=\"fa arrow\"></span></a>";
-        d="</li>";
-        third_level="<ul class=\"nav nav-third-level\">";
-        
-            $.each(data, function(i, e){
-                t = a+ b + e.project + c;
-                //insert next level menu 
-                t = t + third_level;
-                t = t + "<li><a href=\"#\">Testing Plans</a></li>"
-                t = t + "<li><a href=\"#\">Testing Machines</a></li>"
-                t = t + "</ul>";//end third level
-                t = t + d;
-                $("#projects_list").append(t);
-            });
-        },
-        async: false
-    });
     $.ajax({
         url: '../services/readsyslogfile.py',
         dataType: 'json',
@@ -944,35 +914,6 @@
         },
         async: false
     });
-    //    var a;
-    //    var b;
-    //    var c;
-    //    var d;
-    //    var third_level;
-    //    var t;
-    //    a="<li>";
-    //    b="<a href=\"#\" class=\"active\">";
-    //    c="<span class=\"fa arrow\"></span></a>";
-    //    d="</li>";
-    //    third_level="<ul class=\"nav nav-third-level\">";
-    //    $.getJSON("../data/projects.py", {}, function(data){
-    //        //all clear 
-    //        $("#projects_list").html("");
-    //        $.each(data, function(i, e){
-    //            t = a+ b + e.project + c;
-    //            //insert next level menu 
-    //            t = t + third_level;
-    //            t = t + "<li><a href=\"#\">Testing Scenarios</a></li>"
-    //            t = t + "<li><a href=\"#\">Testing Machines</a></li>"
-    //            t = t + "<li><a href=\"#\">Testing List</a></li>"
-    //            t = t + "</ul>";//end third level
-    //            t = t + d;
-    //            $("#projects_list").append(t);
-    //        });
-    //        data="";
-    //        console.log($("#projects_list li").length);
-    //    });
-    //});
     </script>
 
     <!-- Bootstrap Core JavaScript -->

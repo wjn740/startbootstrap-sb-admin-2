@@ -4,12 +4,13 @@ import mysql.connector
 from collections import OrderedDict
 import collections
 import json
+import cgi
 
 config = {
-        'user' : 'jnwang',
-        'password' : 'susetesting',
-        'host' : '147.2.207.100',
-        'database' : 'reportdb',
+        'user' : 'qadb',
+        'password' : '',
+        'host' : '147.2.207.30',
+        'database' : 'qadb',
         'raise_on_warnings': True,
         }
 
@@ -32,20 +33,21 @@ def mysqlquery(query):
     objects_list = []
     for row in rows:
         d = collections.OrderedDict()
-        d['project'] = row[0]
-        d['baselines'] = []
-        #start cursor1 query
-        query1=('select distinct `r_release`,`r_run_id` from distro_plan_pair_view where `q_release` = \'' + d['project'] + '\' and `q_release` <> `r_release`;');
-        cursor.execute(query1)
-        rows1 = cursor.fetchall()
-        for row1 in rows1:
-            d1 = collections.OrderedDict()
-            d1['r_release'] = row1[0]
-            d1['r_run_id'] = row1[1]
-            d['baselines'].append(d1)
+        d['host'] = row[0]
+        d['testcase'] = row[1]
+        d['testsuite'] = row[2]
+        d['Count'] = row[3]
         objects_list.append(d)
     j = json.dumps(objects_list)
     print(j)
 
+
+form = cgi.FieldStorage()
 print("Content-type: text/plain\n")
-mysqlquery('select distinct `release` from distro_run_view order by `release` desc;')
+if "r_run_id" not in form or "r_release" not in form:
+    print("<H1>ERROR:No parameters from the request</H1>")
+r_release = form.getvalue('r_release')
+r_run_id = form.getvalue('r_run_id')
+
+
+mysqlquery('select `host`,`testcase`,`testsuite`,count(`testsuite`) from performance_view where (`host` = \'apac2-ph022.bej.suse.com\' or `host` = \'apac2-ph027.bej.suse.com\' or `host` = \'apac2-ph023.bej.suse.com\' or `host` = \'apac2-ph026.bej.suse.com\') and `product` = \''+ r_release + '\' and `comment` like \'%' + r_run_id + '%\' group by `host`,`testsuite`,`testcase`;')

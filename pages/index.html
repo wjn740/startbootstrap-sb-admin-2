@@ -902,6 +902,15 @@
 
     <!-- jQuery -->
     <script src="../vendor/jquery/jquery.min.js"></script>
+    <!-- Remove noused element -->
+    <script>
+    $(function(){
+        $("#page-wrapper .row:nth-child(2)").fadeOut();
+        $("#page-wrapper .row:nth-child(3) .col-lg-8").fadeOut();
+        $("#page-wrapper .row:nth-child(3) .col-lg-4 .chat-panel").fadeOut();
+        $("#page-wrapper .row:nth-child(3) .col-lg-4 .panel:nth-child(2)").fadeOut();
+    });
+    </script>
     <script src="../js/projects.js"></script>
     <script>
     $.ajax({

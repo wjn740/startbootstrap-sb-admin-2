@@ -68,5 +68,6 @@ $(function(){
             ],
         });
         
+    $(".navbar-collapse").collapse("toggle");
     });
 });

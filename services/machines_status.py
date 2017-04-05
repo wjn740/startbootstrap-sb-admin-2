@@ -27,7 +27,7 @@ for host in hosts:
     except socket.timeout:
         continue
 
-
+    progress=""
     msg = "".join(stdout.readlines())
     s="The current ration is (\d+)\.?(\d+)?" 
     for l in msg.splitlines():
